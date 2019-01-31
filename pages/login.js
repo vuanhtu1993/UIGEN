@@ -15,7 +15,7 @@ export default class Login extends React.Component {
           </div>
           <div>
             Form
-            <MyEnhancedForm/>
+            <MyEnhancedForm abc={{email: "acb", password: "123"}}/>
           </div>
         </div>
       </Layout>

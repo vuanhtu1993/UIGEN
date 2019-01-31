@@ -81,7 +81,8 @@ const formikEnhancer = withFormik({
       .min(2, "C'mon, your password is longer than that")
       .required('Password is required.'),
   }),
-  mapPropsToValues: ({ form }) => ({ ...form }),
+  mapPropsToValues: ({ abc }) => ({ ...abc }),
+  isInitialValid: true,
   handleSubmit: (payload, { setSubmitting }) => {
     alert(payload.email);
     setSubmitting(false)
