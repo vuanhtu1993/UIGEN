@@ -36,15 +36,19 @@ const Home = () => (
           <p>Was this tool helpful? Let us know how we can improve it</p>
         </a>
         </Link>
-      </div>
-      <div>
         <Link href="/acceptInvitation">
           <a className="card">
             <h3>Accept Invitation &rarr;</h3>
             <p>Was this tool helpful? Let us know how we can improve it</p>
           </a>
         </Link>
-      </div>
+        <Link href="/login">
+          <a className="card">
+            <h3>Login &rarr;</h3>
+            <p>Was this tool helpful? Let us know how we can improve it</p>
+          </a>
+        </Link>
+        </div>
     </div>
 
     <style jsx>{`
