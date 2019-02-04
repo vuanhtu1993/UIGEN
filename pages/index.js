@@ -49,6 +49,14 @@ const Home = () => (
           </a>
         </Link>
         </div>
+      <div className="row">
+        <Link href="/gridLayout">
+          <a className="card">
+            <h3>Layout &rarr;</h3>
+            <p>Was this tool helpful? Let us know how we can improve it</p>
+          </a>
+        </Link>
+      </div>
     </div>
 
     <style jsx>{`
