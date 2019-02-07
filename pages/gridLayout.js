@@ -1,7 +1,66 @@
 import React from 'react'
+import Webcam from "react-webcam";
+import InputFiles from 'react-input-files';
+import { Document, Page } from 'react-pdf';
 
 export default class GridLayout extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      image: null,
+      inputImage: null,
+      inputPDF: null,
+      numPages: null,
+      pageNumber: 1,
+    }
+  }
+
+  setRef = webcam => {
+    this.webcam = webcam;
+  };
+
+  capture = () => {
+    const imageSrc = this.webcam.getScreenshot();
+    this.setState({image: imageSrc})
+  };
+
+  handleChange = (files) => {
+    console.log(files);
+    if (files.length > 0) {
+      let file = files[0];
+      if (file.type == "application/pdf") {
+        this.getBase64(file, (result) => this.setState({inputPDF: result}))
+      } else if (file.type == "image/png" || files[0].type == "image/jpeg") {
+        this.setState({ inputImage: URL.createObjectURL(files[0]) });
+      }
+    }
+  };
+
+  onDocumentLoadSuccess = ({ numPages }) => {
+    this.setState({ numPages });
+  };
+
+  getBase64(file, cb) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      cb(reader.result)
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
+
   render() {
+
+    const videoConstraints = {
+      width: 1280,
+      height: 720,
+      facingMode: "user"
+    };
+
     return (
       <div className="wrapper">
         <h4>Wrapper Layout 1</h4>
@@ -85,6 +144,64 @@ export default class GridLayout extends React.Component {
             There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
             If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
           </div>
+        </div>
+        <div className="wrapper-layout3">
+          <div className="navigation">
+            Navigation
+          </div>
+          <div className="main-content">
+            Main-content
+          </div>
+          <div className="footer-content">
+            Footer-content
+          </div>
+        </div>
+        <div className="camera">
+          Camera
+          <Webcam
+            audio={false}
+            height={350}
+            ref={this.setRef}
+            screenshotFormat="image/jpeg"
+            onUserMedia = { (mes) => console.log(mes, "mes") }
+            onUserMediaError = { (err) => console.log(err, "err") }
+            width={350}
+            videoConstraints={videoConstraints}
+          />
+          <button onClick={this.capture}>Capture photo</button>
+          <img src={this.state.image} alt=""/>
+        </div>
+
+        <div className="chooseFile">
+          Choose file
+          <div>
+            <InputFiles
+              onChange={this.handleChange}
+              accept=".CR2, .JPG, .PNG, .PDF">
+              <button>Upload</button>
+            </InputFiles>;
+          </div>
+          {this.state.inputImage !== null ? (
+            <div>
+              Image
+              <img src={this.state.inputImage}
+                   width={350}
+                   alt=""/>
+            </div>
+          ) : null}
+
+          {this.state.inputPDF !== null ? (
+            <div>
+              PDF file
+              <Document
+                file={this.state.inputPDF}
+                onLoadSuccess={this.onDocumentLoadSuccess}
+              >
+                <Page pageNumber={this.state.pageNumber} />
+              </Document>
+              <p>Page {this.state.pageNumber} of {this.state.numPages}</p>
+            </div>
+          ) : null}
         </div>
       </div>
     )

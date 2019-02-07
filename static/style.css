@@ -94,3 +94,84 @@
 .wrapper-layout2 div:nth-child(even) {
     background-color: aquamarine;
 }
+
+/*Wrapper 3*/
+/*-----------Mobile------------*/
+@media only screen and (max-width: 600px) {
+    .wrapper-layout3 {
+        background: #007eff;
+        display: grid;
+        grid-gap: 1em;
+        grid-auto-rows: minmax(100px, auto);
+        grid-template-columns: 1fr;
+        grid-template-areas:
+                "navigation"
+                "main-content"
+                "footer-content";
+
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .wrapper-layout3 {
+        background: #007eff;
+        display: grid;
+        grid-gap: 1em;
+        grid-auto-rows: minmax(100px, auto);
+        grid-template-columns: 1fr;
+        grid-template-areas:
+                "navigation"
+                "main-content"
+                "footer-content";
+
+    }
+}
+
+/*-------Tablet---------*/
+@media only screen and (min-width: 992px) {
+    .wrapper-layout3 {
+        background: aquamarine;
+        display: grid;
+        grid-gap: 1em;
+        grid-auto-rows: minmax(100px, auto);
+        grid-template-columns: 1fr 3fr;
+        grid-template-areas:
+                "navigation main-content main-content main-content"
+                "navigation footer-content footer-content footer-content";
+
+    }
+}
+/*-------Desktop---------*/
+@media only screen and (min-width: 1200px) {
+    .wrapper-layout3 {
+        background: indianred;
+        display: grid;
+        grid-gap: 1em;
+        grid-auto-rows: minmax(100px, auto);
+        grid-template-columns: 1fr 3fr;
+        grid-template-areas:
+                "navigation main-content main-content main-content"
+                "navigation footer-content footer-content footer-content";
+
+    }
+}
+
+.navigation {
+    grid-area: navigation;
+    border: 1px solid red;
+}
+
+.main-content {
+    grid-area: main-content;
+    border: 1px solid blue;
+}
+
+.footer-content {
+    grid-area: footer-content;
+    border: 1px solid yellow;
+}
+
+/*Camera*/
+.camera {
+    border: 1px solid black;
+}

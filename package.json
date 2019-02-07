@@ -12,6 +12,11 @@
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-file-input": "^0.2.5",
+    "react-file-picker": "^0.0.5",
+    "react-input-files": "^1.1.1",
+    "react-pdf": "^4.0.2",
+    "react-webcam": "^1.1.0",
     "types": "^0.1.1",
     "yup": "^0.26.10"
   }
