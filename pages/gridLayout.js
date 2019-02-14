@@ -26,16 +26,24 @@ export default class GridLayout extends React.Component {
     this.setState({image: imageSrc})
   };
 
-  handleChange = (files) => {
+  handleChooseFile = (files) => {
     console.log(files);
     if (files.length > 0) {
       let file = files[0];
+      if (file.size > 150000) {
+        this.showAlert('jsfhashfahfhasifhash');
+        return
+      }
       if (file.type == "application/pdf") {
         this.getBase64(file, (result) => this.setState({inputPDF: result}))
       } else if (file.type == "image/png" || files[0].type == "image/jpeg") {
         this.setState({ inputImage: URL.createObjectURL(files[0]) });
       }
     }
+  };
+
+  showAlert = (message) => {
+    alert(message)
   };
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -176,9 +184,9 @@ export default class GridLayout extends React.Component {
           Choose file
           <div>
             <InputFiles
-              onChange={this.handleChange}
+              onChange={this.handleChooseFile}
               accept=".CR2, .JPG, .PNG, .PDF">
-              <button>Upload</button>
+              <img src="https://www.psdgraphics.com/file/3d-push-button.jpg" alt="" style={{width: 100, height: "auto"}}/>
             </InputFiles>;
           </div>
           {this.state.inputImage !== null ? (
